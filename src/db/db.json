@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "Admin123",
+      "email": "admin@gmail.com",
+      "profileImg": "test",
+      "balance": "99999999",
+      "role": "admin"
+    },
+   
+    {
+      "id": "8",
+      "username": "rovsen",
+      "password": "Rovsen",
+      "email": "r@gmail.com",
+      "profileImg": "https://media.wired.com/photos/59332b9a95879f6d0c00ad49/master/pass/e68e23a3-1c6c-5975-2ce6-78b013b9ff74_BBS5B_Gallery_0997_RGB_V1.jpg",
+      "balance": 213,
+      "role": "client",
+      "basketItems": [],
+      "createdAt": "2024-05-09T19:10:46.073Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "4856"
+    }
+  ],
+  "messages": [
+    {
+      "id": "030a"
+    }
+  ],
+  "orders": [
+    {
+      "id": "54ea"
+    }
+  ],
+  "categories": [
+    {
+      "id": "7821"
+    }
+  ]
+}

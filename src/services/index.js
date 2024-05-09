@@ -3,6 +3,19 @@ import { BASE_URL } from './base';
 
 
 
+
+export async function getById(endpoint,id) {
+  let result = { data: null, error: null }
+  await axios.get(BASE_URL + endpoint+`/${id}`)
+      .then((res) => {
+          result = { ...result, data: res.data }
+      })
+      .catch((err) => {
+          result = { ...result, error: err }
+      })
+  return result
+}
+
 export async function getAll(endpoint){
     let result ={data:null, error:null}
     await axios.get(BASE_URL + endpoint)
@@ -55,5 +68,6 @@ async function patch(endpoint, id, payload) {
     getAll: getAll,
     delete: deleteOne,
     patch: patch,
+    getById: getById
   };
   export default controller

@@ -8,6 +8,9 @@ a{
   text-decoration: none;
   color: white;
 }
+.darkCss{
+  color: black !important;
+}
 ul{
 list-style: none;
 text-decoration: none;

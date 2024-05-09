@@ -84,7 +84,7 @@ export const ROUTES=[
             element:<LoginClient/>,
         },
         {
-            path:'productdetail',
+            path:'productdetail/:id',
             element:<ProductDetail/>,
         },
         {

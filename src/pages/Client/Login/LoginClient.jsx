@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import UserSchema from "../../../validations/users.validation";
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import AdminSchema from '../../../validations/adminlogin.validation';
 
 
 const LoginClient = () => {
@@ -16,6 +17,7 @@ const LoginClient = () => {
       password: ''
     },
     onSubmit: values => {
+      console.log('sa')
       console.log("vaaa", values)
       const foundUser = users.find(
         (x) =>
@@ -39,7 +41,7 @@ const LoginClient = () => {
       }
 
     },
-    validationSchema: UserSchema
+    validationSchema: AdminSchema
   })
 
 

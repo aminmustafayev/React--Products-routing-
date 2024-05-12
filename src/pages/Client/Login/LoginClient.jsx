@@ -17,8 +17,7 @@ const LoginClient = () => {
       password: ''
     },
     onSubmit: values => {
-      console.log('sa')
-      console.log("vaaa", values)
+      console.log("client")
       const foundUser = users.find(
         (x) =>
           x.username == values.username &&

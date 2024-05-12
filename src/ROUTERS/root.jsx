@@ -42,7 +42,7 @@ export const ROUTES=[
             },
             {
                index: true,
-                element:<Dashboard/>,
+               element:<Dashboard/>, 
             },
             {
                 path:'message',

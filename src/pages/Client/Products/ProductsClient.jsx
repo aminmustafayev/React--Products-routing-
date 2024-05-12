@@ -56,6 +56,9 @@ const ProductsClient = () => {
                     <Button size="small" color="primary">
                       <Link className="darkCss" to={`/productdetail/${e.id}`}>Detail</Link>
                     </Button>
+                    <Button size="small" color="error">
+                      Delete
+                    </Button>
                   </CardActions>
                 </Card>
 

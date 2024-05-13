@@ -27,12 +27,12 @@ const ProductsClient = () => {
 
   return (
     <>
-      <Grid container style={{ width: '80%', margin: "50px  auto" }}   >
+      <Grid  container style={{ width: '80%', margin: "50px  auto" }}   >
         {
           data && data.map((e) => {
             return (
               <Grid key={e.id} item xs={12} md={6} sm={12} lg={3} >
-                <Card style={{minHeight:"500px", margin: "20px", objectFit:"cover",  }}>
+                <Card style={{minHeight:"450px", margin: "20px", objectFit:"cover",  }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -55,9 +55,6 @@ const ProductsClient = () => {
                   <CardActions>
                     <Button size="small" color="primary">
                       <Link className="darkCss" to={`/productdetail/${e.id}`}>Detail</Link>
-                    </Button>
-                    <Button size="small" color="error">
-                      Delete
                     </Button>
                   </CardActions>
                 </Card>

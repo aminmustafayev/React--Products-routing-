@@ -8,7 +8,9 @@ import { useState } from "react";
 import TextArea from "antd/es/input/TextArea";
 import { Button } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-
+import { endpoints } from "../../../services/base";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 
 
 const AddProduct = () => {
@@ -19,30 +21,10 @@ const AddProduct = () => {
     description: "",
     imgSrc: "",
     discountPercentage: "",
-    categoryId: "",
     stockCount: ""
   });
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
-    controller
-      .post(endpoints.products, newProduct)
-      .then(() => navigate("/admin/products"));
-
-    toast.success("new country added!", {
-      autoClose: 1500,
-    });
-    setNewProduct({
-      name: "",
-      salePrice: "",
-      costPrice: "",
-      description: "",
-      imgSrc: "",
-      discountPercentage: "",
-      categoryId: "",
-      stockCount: ""
-    });
-  }
+  
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -51,21 +33,29 @@ const AddProduct = () => {
       description: "",
       imgSrc: "",
       discountPercentage: "",
-      categoryId: "",
       stockCount: ""
     },
-    onSubmit: async (values, { resetForm }) => {
-      await post(endpoints.products, values).then(() => {
-        resetForm()
-        setTimeout(() => {
-          navigate("/admin/products");
-        }, 2000);
-        toast.success("new country added!", {
-          autoClose: 1500,
-        });
-      })
-
-
+    onSubmit:(values)=> {
+     
+      controller.post(endpoints.products, values)
+  
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => navigate("/admin/product"));
+      
+      values={
+        name: "",
+        salePrice: "",
+        costPrice: "",
+        description: "",
+        imgSrc: "",
+        discountPercentage: "",
+        stockCount: ""
+      };
     },
     validationSchema: ProductSchema,
   });
@@ -102,7 +92,7 @@ const AddProduct = () => {
             placeholder="Sales Price"
 
           />
-          {formik.errors.name && (
+          {formik.errors.salePrice && (
             <span style={{ color: "red" }}>{formik.errors.salePrice}</span>
           )}
           <Input
@@ -113,7 +103,7 @@ const AddProduct = () => {
             value={formik.values.costPrice}
             placeholder="Cost Price"
           />
-          {formik.errors.name && (
+          {formik.errors.costPrice && (
             <span style={{ color: "red" }}>{formik.errors.costPrice}</span>
           )}
           <Input
@@ -124,7 +114,7 @@ const AddProduct = () => {
             value={formik.values.discountPercentage}
             placeholder="DisCount Percentage"
           />
-          {formik.errors.name && (
+          {formik.errors.discountPercentage && (
             <span style={{ color: "red" }}>{formik.errors.discountPercentage}</span>
           )}
 
@@ -136,7 +126,7 @@ const AddProduct = () => {
             value={formik.values.imgSrc}
             placeholder="Img"
           />
-          {formik.errors.name && (
+          {formik.errors.imgSrc && (
             <span style={{ color: "red" }}>{formik.errors.imgSrc}</span>
           )}
           <Input
@@ -147,7 +137,7 @@ const AddProduct = () => {
             value={formik.values.stockCount}
             placeholder="StockCount"
           />
-          {formik.errors.name && (
+          {formik.errors.stockCount && (
             <span style={{ color: "red" }}>{formik.errors.stockCount}</span>
           )}
           <TextArea
@@ -158,7 +148,7 @@ const AddProduct = () => {
             onChange={formik.handleChange}
             value={formik.values.description}
           />
-          {formik.errors.name && (
+          {formik.errors.description && (
             <span style={{ color: "red" }}>{formik.errors.description}</span>
           )}
         </div>

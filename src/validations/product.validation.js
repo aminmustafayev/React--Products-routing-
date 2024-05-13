@@ -7,7 +7,6 @@ const ProductSchema =Yup.object().shape({
         imgSrc: Yup.string().url('url olmalidir').required('img is required'),
         discountPercentage: Yup.number().min(0).max(100).required('0 100 araliqinda olmalidir'),
         description: Yup.string().min(10).required('doldur bos buraxma'),
-        categoryId: Yup.string().required(),
         stockCount: Yup.number().required('reqem daxil et').min(1)
       });
       

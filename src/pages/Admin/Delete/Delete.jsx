@@ -2,7 +2,7 @@ import React from 'react'
 import Swal from 'sweetalert2'
 import { deleteOne } from '../../../services'
 
-const Delete = ({id, getdData}) => {
+const Delete = ({id, getData}) => {
     return (
     <>
     <button style={{backgroundColor:"red", border:"none",
@@ -20,7 +20,7 @@ const Delete = ({id, getdData}) => {
             }).then(async(result)=>{
                 if(result.isConfirmed){
                     await deleteOne("products", id)
-                    getdData()
+                    getData()
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",

@@ -40,7 +40,6 @@ const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-//tamamlamaq yadda qalsin die 
 const OrdersSchema = new mongoose.Schema({
   userId: String,
   totalPrice: Number,
@@ -48,11 +47,26 @@ const OrdersSchema = new mongoose.Schema({
 },
 { timestamps: true }
 );
+const MessagesSchema = new mongoose.Schema({
+  fullName:String,
+  email:String,
+  title:String,
+  message:String
+},
+{ timestamps: true }
+);
+const CategorySchema= mongoose.Schema({
+  name: String
+},
+{timestamps:true}
+)
 
 //models
 const UsersModel = mongoose.model("Users", UsersSchema);
 const ProductModel = mongoose.model("Product", ProductSchema);
 const OrdersModel = mongoose.model("Orders", OrdersSchema);
+const MessagesModel = mongoose.model("Messages",MessagesSchema);
+const CategoryModel = mongoose.model("Category",CategorySchema)
 
 //Crud-users
 app.get("/api/users", async (req, res) => {
@@ -176,9 +190,7 @@ app.delete("/api/products/:id", async (req, res) => {
   try {
     response = await ProductModel.findByIdAndDelete(id)
   } catch (error) {
-    res.send({
-      error: error
-    })
+    res.send({error: error})
   }
   res.send({
     message: "delete",
@@ -192,7 +204,204 @@ app.patch("/api/products/:id", async(req,res)=>{
     message:"update",
     data:response
   })
+});
+
+//Crud - orders
+app.get("/api/orders", async(req,res)=>{
+  const order = await OrdersModel.find()
+  if (order.length>0) {
+    res.send({
+      message:"success",
+      data:order
+    })
+  }
+  else{
+    res.send({
+      message:'not fount',
+      data:null
+    })
+  }
 })
+app.get("/api/orders/:id", async(req,res)=>{
+  const {id} = req.params;
+  let order;
+  try {
+  order=await OrdersModel.findById(id)  
+  } 
+  catch (error) {
+    res.send({error:error})
+  }
+  if (order) {
+    res.send({
+      message:'success',
+      data:order
+    })
+  }
+  else{
+    res.send({
+      message:"not found",
+      data:null
+    })
+  }
+})
+app.post("/api/orders", async(req,res)=>{
+  const order = new OrdersModel(req.body)
+  await order.save()
+  res.send({
+    message:"post",
+    data:order
+  })
+})
+app.delete("/api/orders/:id", async(req,res)=>{
+const {id}= req.params
+let order
+try {
+  order = await OrdersModel.findOneAndDelete(id)
+} catch (error) {
+  res.send({error:error})
+}
+res.send({
+  message:"delete",
+  data:order
+})
+})
+app.patch("/api/orders/:id", async(req,res)=>{
+  const {id}= req.params
+  const order = await OrdersModel.findByIdAndUpdate(id,req.body);
+res.send({
+  message:"update",
+  data:order
+})
+})
+
+//Crud - messages
+app.get("/api/messages",async(req,res)=>{
+  const message = await MessagesModel.find()
+  if (message.length>0) {
+    res.send({
+      message:"success",
+      data:message
+    })
+  }else{
+    res.send({
+      message:"not fount",
+      data:null
+    })
+  }
+})
+app.get("/api/messages/:id",async(req,res)=>{
+  const {id}=req.params
+  let message;
+  try {
+    message=await MessagesModel.findById(id)
+  } catch (error) {
+    res.send({error:error})
+  }
+  if(message){
+    res.send({
+      message:'success',
+      data:message
+    })
+  }
+  else{
+    res.send({
+      message:"not fount",
+      data:null
+    })
+  }
+})
+app.post("/api/messages",async(req,res)=>{
+  const message = new MessagesModel(req.body)
+  await message.save()
+ res.send({
+  message:"post",
+  data:message
+ })
+})
+app.delete("/api/messages/:id",async(req,res)=>{
+  const {id} = req.params
+  let message;
+  try {
+    message=await MessagesModel.findByIdAndDelete(id)
+  } catch (error) {
+    res.send({error:error})
+  }
+  res.send({
+    message:"delete",
+    data:message
+  })
+})
+app.patch("/api/messages/:id", async(req,res)=>{ 
+  const {id}=req.params;
+const message= await MessagesModel.findByIdAndUpdate(id,req.body);
+res.send({
+  message:"update",
+  data:message
+})
+})
+
+//Crud - category
+app.get("/api/category",async(req,res)=>{
+  const category = await CategoryModel.find()
+  if (category.length>0) {
+    res.send({
+      message:"success",
+      data:category
+    })
+  }else{
+    res.send({
+      message:"not found",
+      data:null
+    })
+  }
+})
+app.get("/api/category/:id", async(req,res)=>{
+  const {id}= req.params
+  let category
+  try {
+    category= await CategoryModel.findById(id)
+  } catch (error) {
+    res.send({error:error})
+  }
+  if (category) {
+    res.send({
+      message:"success",
+      data:category
+    })
+  }
+})
+app.post("/api/category", async(req,res)=>{
+  const category = new CategoryModel(req.body)
+  await category.save()
+  res.send({
+    message:"post",
+    data:category
+  })
+})
+app.delete("/api/category/:id", async(req,res)=>{
+  const {id}= req.params
+  let category
+  try {
+    category = await CategoryModel.findByIdAndDelete(id)
+  } catch (error) {
+    res.send({error:error})
+  }
+  res.send({
+    message:"delete",
+    data:category
+  })
+})
+app.patch("/api/category/:id", async(req,res)=>{  
+  const {id}=req.params
+  const category = await CategoryModel.findByIdAndUpdate(id
+    ,req.body
+  ) 
+  res.send({
+    message:"update",
+    data:category
+  })
+})
+
 
 
 

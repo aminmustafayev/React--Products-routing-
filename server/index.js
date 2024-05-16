@@ -18,16 +18,16 @@ app.use(cors());
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const UsersSchema = new mongoose.Schema(
-  {
-    username: String,
-    password: String,
-    email: String,
-    profileImg: String,
-    balance: Number,
-  },
-  { timestamps: true }
-);
+  const UsersSchema = new mongoose.Schema(
+    {
+      username: String,
+      password: String,
+      email: String,
+      profileImg: String,
+      balance: Number,
+    },
+    { timestamps: true }
+  );
 const ProductSchema = new mongoose.Schema(
   {
     name: String,
